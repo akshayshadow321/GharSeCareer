@@ -5,6 +5,7 @@ import './App.css'
 import AddCourse from './pages/AddCourse';
 import AddContent from './pages/AddContent';
 import AdminDashboard from './pages/AdminDashboard';
+import PendingApproval from './pages/PendingApproval';
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
         <Routes>
           <Route path='/' element={<LandingPage />}></Route>
           <Route path='/pendingApproval' element={<PendingApproval />}></Route>
-          
+          <Route path='/admin' element={<AdminDashboard/>}></Route>
         </Routes>
       </BrowserRouter>
     </>

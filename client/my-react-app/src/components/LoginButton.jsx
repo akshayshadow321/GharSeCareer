@@ -18,9 +18,11 @@ export default function LoginButton() {
                 toast.loading('Logging in...');
                 localStorage.setItem("email", email);
                 localStorage.setItem("id", response.data.id);
-                if (response.data.email === "admin@example.com") {
+
+                if (email == "admin@gmail.com") {
+                    console.log('here')
                     setTimeout(() => {
-                        navigate('/admin/users');
+                        navigate('/admin');
                     }, 1500);
                 }
                 setTimeout(() => {

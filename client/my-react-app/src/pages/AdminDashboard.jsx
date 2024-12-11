@@ -15,7 +15,7 @@ const AdminDashboard = () => {
     }
   return (
     <div>
-        {type == 'user'?viewUser() :type == 'emp'? viewEmployers ():viewEmpApplicants() }
+        {view == 'user'?viewUser() :view == 'emp'? viewEmployers ():viewEmpApplicants() }
     </div>
   )
 }
