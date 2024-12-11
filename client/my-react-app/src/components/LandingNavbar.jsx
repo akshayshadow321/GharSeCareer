@@ -27,7 +27,7 @@ export default function LandingNavbar() {
                             </ul>
                         </div>
                         {
-                            localStorage.getItem("username") ?
+                            localStorage.getItem("email") ?
                                 (
                                     <AccountBubble />
                                 )
