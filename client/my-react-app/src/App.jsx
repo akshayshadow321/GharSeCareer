@@ -3,6 +3,8 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
 import AddCourse from './pages/AddCourse';
+import AddContent from './pages/AddContent';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
 
@@ -10,7 +12,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<AddCourse />}></Route>
+          <Route path='/' element={<AdminDashboard />}></Route>
         </Routes>
       </BrowserRouter>
     </>
