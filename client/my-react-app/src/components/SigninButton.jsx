@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useForm } from 'react-hook-form';
 
 export default function SigninButton(props) {
-    const ButtonClass = "btn btn-secondary border-0 text-black hover:bg-yellow-400 " + props.bg;
+    const ButtonClass = "btn btn-secondary border-0 text-black hover:bg-purple-700 bg-purple-500 " + props.bg;
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

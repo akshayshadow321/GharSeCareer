@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useForm } from 'react-hook-form';
 
 export default function LoginButton() {
-    const ButtonClass = "btn btn-secondary border-0 text-black hover:bg-yellow-400 bg-yellow-300";
+    const ButtonClass = "btn btn-secondary border-0 text-black hover:bg-purple-700 bg-purple-500";
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
