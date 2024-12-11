@@ -4,7 +4,8 @@ import logo from "../assets/images/ghar se career.jpg"; // Your company logo
 
 function LandingFooter() {
   return (
-    <div className="min-h-screen flex flex-col">
+    
+    <div className="min-h-screen flex flex-col mt-10 ">
       {/* Main content area */}
       <div className="flex-grow">
         <footer className="bg-gray-100 py-8 shadow-md drop-shadow-md poppins-semibold">
