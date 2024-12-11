@@ -5,6 +5,7 @@ import './App.css'
 import AddCourse from './pages/AddCourse';
 import AddContent from './pages/AddContent';
 import AdminDashboard from './pages/AdminDashboard';
+import PlayVideo from './components/PlayVideo';
 import PendingApproval from './pages/PendingApproval';
 
 function App() {
