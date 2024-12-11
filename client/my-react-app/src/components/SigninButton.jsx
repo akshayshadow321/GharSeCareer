@@ -8,23 +8,23 @@ import { useForm } from 'react-hook-form';
 export default function SigninButton(props) {
     const ButtonClass = "btn btn-secondary border-0 text-black hover:bg-yellow-400 " + props.bg;
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const [username, setUsername] = useState('');
+    const [name, setname] = useState('');
     const [password, setPassword] = useState('');
 
     // Watch the password value to compare with confirmPassword
     const passwordValue = watch("password", "");
 
     const onSubmit = async (data) => {
-        const { username, password, email, phone } = data;
+        const { name, password, email, phone } = data;
 
-        const bool = await userAvailable(username);
+        const bool = await userAvailable(name);
         if (bool) {
-            createUser(username, password, email, phone);
+            createUser(name, password, email, phone);
         }
     };
 
-    const createUser = async (username, password, email, phone) => {
-        await axios.post('http://localhost:3001/createUser', { username, password, email, phone })
+    const createUser = async (name, password, email, phone) => {
+        await axios.post('http://localhost:3001/createUser', { name, password, email, phone })
             .then((resp) => {
                 if (resp.data.created) {
                     toast.success('Account Created!');
@@ -36,12 +36,12 @@ export default function SigninButton(props) {
             .catch(err => console.log(err));
     };
 
-    const userAvailable = async (username) => {
+    const userAvailable = async (name) => {
         try {
-            const resp = await axios.post('http://localhost:3001/check', { username });
+            const resp = await axios.post('http://localhost:3001/check', { name });
 
             if (resp.data.exists) {
-                toast.error('Username already exists!!');
+                toast.error('User already exists!!');
                 return false;
             } else {
                 return true;
@@ -68,16 +68,16 @@ export default function SigninButton(props) {
                         <div className="modal-body">
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <div className="mb-3">
-                                    <label htmlFor="username-reg" className="form-label">Enter Username:</label>
+                                    <label htmlFor="name-reg" className="form-label">Enter Full Name:</label>
                                     <input
                                         className="form-control"
-                                        id="username-reg"
-                                        {...register('username', {
-                                            required: 'Username is required',
-                                            minLength: { value: 8, message: 'Username must be at least 8 characters long' }
+                                        id="name-reg"
+                                        {...register('name', {
+                                            required: 'Full Name is required',
+                                            minLength: { value: 3, message: 'Full Name must be at least 3 characters long' }
                                         })}
                                     />
-                                    {errors.username && <p className="text-danger">{errors.username.message}</p>}
+                                    {errors.name && <p className="text-danger">{errors.name.message}</p>}
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="email-reg" className="form-label">Enter Email:</label>
