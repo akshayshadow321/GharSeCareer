@@ -13,6 +13,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LandingPage />}></Route>
+          <Route path='/pendingApproval' element={<PendingApproval />}></Route>
           
         </Routes>
       </BrowserRouter>
