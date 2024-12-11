@@ -34,8 +34,8 @@ export default function LandingNavbar() {
                                 :
                                 (
                                     <div className="flex flex-col gap-2">
-                                        <LoginButton bg='bg-yellow-300' />
-                                        <SigninButton bg='bg-yellow-300' />
+                                        <LoginButton bg='bg-purple-500' />
+                                        <SigninButton bg='bg-purple-500' />
                                     </div>
                                 )
                         }
