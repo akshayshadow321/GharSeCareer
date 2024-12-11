@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import UserRoutes from './routes/UserRoutes.js'
 
 dotenv.config()
 
@@ -20,6 +21,8 @@ mongoose.connect(process.env.MONGO_URL)
 app.get('/', (req, res) => {
     res.send('testing 123')
 })
+
+app.use('/', UserRoutes);
 
 
 app.listen(process.env.PORT, () => {
