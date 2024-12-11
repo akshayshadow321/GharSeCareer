@@ -5,7 +5,7 @@ function AddCourse() {
   return (
     <div
       style={{
-        height: "100vh",
+        
         backgroundColor: "violet",
         display: "flex",
         justifyContent: "center",
@@ -15,7 +15,8 @@ function AddCourse() {
         padding: "20px",
       }}
     >
-      <h1 style={{ marginBottom: "30px", color: "#fff" }}>New Course</h1>
+
+      <h1 style={{ marginBottom: "6px",marginTop:'20px', color: "white" ,fontSize:"25px"}}>New Course Details</h1>
       <form
         style={{
           width: "100%",
@@ -126,6 +127,31 @@ function AddCourse() {
             }}
           />
         </div>
+        <div style={{ marginBottom: "20px" }}>
+            <label
+                style={{
+                display: "block",
+                textAlign: "left",
+                marginBottom: "8px",
+                fontWeight: "bold",
+                }}
+            >
+                Image
+            </label>
+            <input
+                name="courseImage"
+                type="file"
+                accept="image/*"
+                placeholder="Upload your image here"
+                style={{
+                width: "100%",
+                padding: "12px",
+                borderRadius: "5px",
+                border: "1px solid #ddd",
+                fontSize: "16px",
+                }}
+            />
+            </div>
 
         <button
           type="submit"
