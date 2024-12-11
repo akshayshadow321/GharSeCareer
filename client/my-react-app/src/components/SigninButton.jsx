@@ -15,16 +15,16 @@ export default function SigninButton(props) {
     const passwordValue = watch("password", "");
 
     const onSubmit = async (data) => {
-        const { username, password } = data;
+        const { username, password, email, phone } = data;
 
         const bool = await userAvailable(username);
         if (bool) {
-            createUser(username, password);
+            createUser(username, password, email, phone);
         }
     };
 
-    const createUser = async (username, password) => {
-        await axios.post('http://localhost:3001/createUser', { username, password })
+    const createUser = async (username, password, email, phone) => {
+        await axios.post('http://localhost:3001/createUser', { username, password, email, phone })
             .then((resp) => {
                 if (resp.data.created) {
                     toast.success('Account Created!');
@@ -78,6 +78,38 @@ export default function SigninButton(props) {
                                         })}
                                     />
                                     {errors.username && <p className="text-danger">{errors.username.message}</p>}
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="email-reg" className="form-label">Enter Email:</label>
+                                    <input
+                                        type="email"
+                                        className="form-control"
+                                        id="email-reg"
+                                        {...register('email', {
+                                            required: 'Email is required',
+                                            pattern: {
+                                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                                message: 'Invalid email address'
+                                            }
+                                        })}
+                                    />
+                                    {errors.email && <p className="text-danger">{errors.email.message}</p>}
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="phone-reg" className="form-label">Enter Phone Number:</label>
+                                    <input
+                                        type="tel"
+                                        className="form-control"
+                                        id="phone-reg"
+                                        {...register('phone', {
+                                            required: 'Phone number is required',
+                                            pattern: {
+                                                value: /^[0-9]{10}$/,
+                                                message: 'Phone number must be 10 digits long'
+                                            }
+                                        })}
+                                    />
+                                    {errors.phone && <p className="text-danger">{errors.phone.message}</p>}
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="password-reg" className="form-label">Enter Password: </label>
