@@ -1,7 +1,9 @@
+import LandingNavbar from "../components/LandingNavbar"
+
 export default function LandingPage(){
     return(
         <>
-            <>h11111</>
+            <LandingNavbar></LandingNavbar>
         </>
     )
 }
