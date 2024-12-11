@@ -28,22 +28,22 @@ const EmployerSchema = new mongoose.Schema({
     }, 
 
     email: { 
-        type: String, required: true, unique: true 
+        type: String, required: true
     }, 
 
     
     jobs: [
         {
-            post: { type: String, required: true },  
-            jd: { type: String, required: true },  
-            duration: { type: String, required: true },  
-            stipend: { type: String, required: true },  
-            criteria: { type: String, required: true }, 
+            post: { type: String},  
+            jd: { type: String },  
+            duration: { type: String},  
+            stipend: { type: String},  
+            criteria: { type: String }, 
             applicants: [
                 {
-                    username: { type: String, required: true },
-                    contact: { type: String, required: true },  
-                    status: { type: String, required: true },
+                    username: { type: String},
+                    contact: { type: String },  
+                    status: { type: String },
                 }
             ]
         }
@@ -51,9 +51,9 @@ const EmployerSchema = new mongoose.Schema({
 
     reviews: [
         {
-            username: { type: String, required: true }, 
-            review: { type: String, required: true }, 
-            liked: { type: Boolean, required: true },  
+            username: { type: String}, 
+            review: { type: String }, 
+            liked: { type: Boolean },  
         }
     ],
 });

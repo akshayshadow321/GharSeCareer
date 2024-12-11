@@ -5,6 +5,7 @@ import './App.css'
 import AddCourse from './pages/AddCourse';
 import AddContent from './pages/AddContent';
 import AdminDashboard from './pages/AdminDashboard';
+import PlayVideo from './components/PlayVideo';
 
 function App() {
 
@@ -12,7 +13,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<LandingPage />}></Route>
+          <Route path='/' element={<PlayVideo/>}></Route>
           
         </Routes>
       </BrowserRouter>
