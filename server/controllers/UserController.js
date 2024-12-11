@@ -4,15 +4,14 @@ import UserModel from "../models/User.js";
 // Function to create a user with password hashing
 export const createUser = async (req, res) => {
     try {
-        console.log('hello')
-        const { username, password, email, phone} = req.body;
+        const { name, password, email, phone } = req.body;
 
         // Generate a salt and hash the password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // Save the user with the hashed password
-        const newUser = await UserModel.create({ username, password: hashedPassword, email ,phone});
+        const newUser = await UserModel.create({ name, password: hashedPassword, email, phone });
 
         console.log(newUser);
         return res.json({ created: true });
@@ -22,36 +21,36 @@ export const createUser = async (req, res) => {
     }
 };
 
-// Function to check if username exists
+// Function to check if email exists
 export const check = async (req, res) => {
-    const { username } = req.body;
-    const data = await UserModel.exists({ username });
-    
+    const { email } = req.body;
+    const data = await UserModel.exists({ email: email });
+
     if (data) {
-        console.log('User already exists');
-        return res.json({ exists: true, message: 'Username exists in the collection' });
+        console.log('Account already created using this email!');
+        return res.json({ exists: true, message: 'Name exists in the collection' });
     } else {
-        console.log('Username available');
+        console.log('Email Valid!');
         return res.json({ exists: false, message: 'No such user exists in the collection!' });
     }
 };
 
 // Function to authenticate the user with password hashing
 export const auth = async (req, res) => {
-    const { username, password } = req.body;
-    const data = await UserModel.findOne({ username });
+    const { email, password } = req.body;
+    const data = await UserModel.findOne({ email: email });
 
     if (data) {
         // Compare the hashed password with the password from the request
         const isMatch = await bcrypt.compare(password, data.password);
-        
+
         if (isMatch) {
-            res.json({ validCreds: true, message: 'Username and Password are correct', id: data._id, username: data.username });
+            res.json({ validCreds: true, message: 'Name and Password are correct', id: data._id, name: data.name });
         } else {
             res.json({ validCreds: false, message: 'Password is wrong!' });
         }
     } else {
-        res.json({ validCreds: false, message: 'Username does not exist!' });
+        res.json({ validCreds: false, message: 'No account with such an email exists!' });
     }
 };
 

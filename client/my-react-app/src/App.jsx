@@ -12,7 +12,8 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<AdminDashboard />}></Route>
+          <Route path='/' element={<LandingPage />}></Route>
+          
         </Routes>
       </BrowserRouter>
     </>
