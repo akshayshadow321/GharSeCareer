@@ -1,12 +1,21 @@
+import axios from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function GetStarted() {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     // Submit function
-    const onSubmit = (data) => {
-        console.log(data); // Handle form data submission
+    const onSubmit = async (data) => {
+        const {companyEmail, companyLink, companyName} = data;
+        const response = await axios.post('http:localhost:3001/createApplication', {companyEmail, companyLink, companyName})
+        if(!response.success){
+            toast.error('Could not send request');
+        }else{
+            useNavigate('')
+        }
     };
 
     return (
