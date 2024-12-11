@@ -23,12 +23,12 @@ export default function LandingPage() {
                                 alt="About us"
                             />
                         </div>
-                        <Link to="/user-path"> {/* Adjusted path for the link */}
+                        <Link to="/user"> {/* Adjusted path for the link */}
                             <button className="mt-4 bg-purple-500 text-white px-6 py-2 rounded hover:bg-purple-900">
                                 Get Started as user
                             </button>
                         </Link>
-                        <Link to="/employee-path"> {/* Adjusted path for the link */}
+                        <Link to="/employee"> {/* Adjusted path for the link */}
                             <button className="mt-4 bg-purple-500 text-white px-6 py-2 rounded hover:bg-purple-900">
                                 Get started as employee
                             </button>
