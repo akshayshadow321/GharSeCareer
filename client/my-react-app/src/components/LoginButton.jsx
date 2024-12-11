@@ -10,15 +10,15 @@ export default function LoginButton() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
-    const authUser = async (username, password) => {
+    const authUser = async (email, password) => {
         try {
-            const response = await axios.post('http://localhost:3001/auth', { username, password });
+            const response = await axios.post('http://localhost:3001/auth', { email, password });
             console.log(response.data);
             if (response.data.validCreds) {
                 toast.loading('Logging in...');
-                localStorage.setItem("username", username);
+                localStorage.setItem("email", email);
                 localStorage.setItem("id", response.data.id);
-                if (response.data.username === "admin") {
+                if (response.data.email === "admin@example.com") {
                     setTimeout(() => {
                         navigate('/admin/users');
                     }, 1500);
@@ -35,8 +35,8 @@ export default function LoginButton() {
     };
 
     const onSubmit = (data) => {
-        const { username, password } = data;
-        authUser(username, password);
+        const { email, password } = data;
+        authUser(email, password);
     };
 
     return (
@@ -45,7 +45,7 @@ export default function LoginButton() {
                 Login
             </button>
 
-            <div className=" modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog LoginModal">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -55,24 +55,33 @@ export default function LoginButton() {
                         <div className="modal-body">
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <div className="mb-3">
-                                    <label htmlFor="username" className="form-label">Username</label>
+                                    <label htmlFor="email-log" className="form-label">Email</label>
                                     <input
+                                        type="email"
                                         className="form-control"
-                                        id="username-log"
-                                        {...register('username', {
-                                            required: 'Username is required'
+                                        id="email-log"
+                                        {...register('email', {
+                                            required: 'Email is required',
+                                            pattern: {
+                                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                                message: 'Invalid email address'
+                                            }
                                         })}
                                     />
-                                    {errors.username && <p className="text-danger">{errors.username.message}</p>}
+                                    {errors.email && <p className="text-danger">{errors.email.message}</p>}
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="password" className="form-label">Password</label>
+                                    <label htmlFor="password-log" className="form-label">Password</label>
                                     <input
                                         type="password"
                                         className="form-control"
                                         id="password-log"
                                         {...register('password', {
-                                            required: 'Password is required'
+                                            required: 'Password is required',
+                                            minLength: {
+                                                value: 8,
+                                                message: 'Password must be at least 8 characters long'
+                                            }
                                         })}
                                     />
                                     {errors.password && <p className="text-danger">{errors.password.message}</p>}
