@@ -17,44 +17,48 @@ const CourseSchema = new mongoose.Schema({
     mentor: { 
         type: String, required: true 
     }, 
+    courseImage :{
+        type : String, require: true
+    },
 
     applicants: [
         {
-            username: { type: String, required: true }, 
-            status: { type: String, required: true },
+            username: { type: String }, 
+            status: { type: String },
         },
     ],
 
     video: [
         {
-            vdlinks: { type: String, required: true }, 
-            title: { type: String, required: true }, 
-            vdtime: { type: Number, required: true }, 
-            topic: { type: String, required: true }, 
+            vdlinks: { type: String }, 
+            title: { type: String }, 
+            vdtime: { type: Number}, 
+            topic: { type: String }, 
         },
     ],
     
     test: [
         {
-            ques: { type: String, required: true }, 
-            options: { type: [String], required: true }, 
-            answer: { type: String, required: true }, 
-            topic: { type: String, required: true }, 
+            ques: { type: String }, 
+            options: { type: [String]}, 
+            answer: { type: String }, 
+            topic: { type: String}, 
         },
     ],
 
     refMaterials: [
         {
-            pfdtitle: { type: String, required: true }, 
-            pdfLink: { type: String, required: true }, 
+            pfdtitle: { type: String}, 
+            pdfLink: { type: String}, 
+            topic: { type: String },
         },
     ],
 
     reviews: [
         {
-            username: { type: String, required: true }, 
-            review: { type: String, required: true }, 
-            liked: { type: Boolean, required: true },
+            username: { type: String}, 
+            review: { type: String }, 
+            liked: { type: Boolean },
         },
     ],
 });
