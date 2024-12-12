@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import './AddContent.css'; // Import the CSS file for styling
-import AddVideoContent from '../components/AddVideoContent';
-import AddRefContent from '../components/AddRefContent';
-const AddContent = () => {
-  const [type, setType] = useState('video');
-
-  const testContent = () => {
-    return (
-      <>
+import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+const CreateTest = () => {
+    const navigate = useNavigate();
+    const handleBackClick = () => {
+        navigate('/testDetails');
+      };
+  return (
+    <div style={{  maxWidth: '800px',margin: '0 auto'}}>
+      <div >
         <h1 className="section-title">Add Test</h1>
-        <form className="content-form" >
+        <form className="content-form">
           <div className="form-group">
             <label htmlFor="question">Question</label>
             <input
@@ -46,31 +47,18 @@ const AddContent = () => {
               placeholder="Enter the correct answer"
             />
           </div>
-          <button type="submit" className="submit-button">Submit Test</button>
+          <button type="submit" className="submit-button">
+            Submit Question
+          </button>
+          <button type="submit" 
+          onClick={handleBackClick} 
+          className="submit-button" >
+            Back
+          </button>
         </form>
-      </>
-    );
-  };
-
- 
-
-  return (
-    <div className="add-content-container">
-      <div className="button-group">
-        <button className="toggle-button" onClick={() => setType('video')}>
-          Add Video
-        </button>
-        <button className="toggle-button" onClick={() => setType('test')}>
-          Add Test
-        </button>
-        <button className="toggle-button" onClick={() => setType('ref')}>
-          Add Reference PDF
-        </button>
       </div>
-
-      {type === 'video' ? <AddVideoContent/> : type === 'test' ? testContent() : <AddRefContent/>}
     </div>
   );
 };
 
-export default AddContent;
+export default CreateTest;

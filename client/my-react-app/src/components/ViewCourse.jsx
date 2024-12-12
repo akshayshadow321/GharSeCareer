@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 const courses = [
   {
     courseName: "Digital Marketing",
@@ -12,6 +13,10 @@ const courses = [
   },
 ];
 const ViewCourse = () => {
+  const navigate = useNavigate();
+  const handleCourseView = () =>{
+    navigate('/courseDetails')
+  }
   return (
     <div>
       <>
@@ -118,6 +123,7 @@ const ViewCourse = () => {
               <div style={{ fontSize: "16px", textAlign: "center" }}>
                 {/* Button to delete comp */}
                 <button
+                onClick={handleCourseView}
                   style={{
                     padding: "8px 15px",
                     backgroundColor: "#6a1b9a",
@@ -127,7 +133,7 @@ const ViewCourse = () => {
                     cursor: "pointer",
                   }}
                 >
-                  Edit
+                  View
                 </button>
                 <button
                   style={{

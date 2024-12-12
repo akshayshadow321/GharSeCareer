@@ -10,6 +10,10 @@ import PendingApproval from './pages/PendingApproval';
 import CourseDetails from './components/CourseDetails';
 import AddJobs from './components/AddJobs';
 import EmpRegister from './components/EmpRegister';
+import Jobs from './pages/Jobs';
+import TestDetails from './components/TestDetails';
+import CreateTest from './components/CreateTest';
+
 
 function App() {
 
@@ -17,8 +21,11 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<AddContent />}></Route>
+          <Route path='/' element={<LandingPage />}></Route>
           <Route path='/pendingApproval' element={<PendingApproval />}></Route>
+          <Route path='/testDetails' element={<TestDetails />}></Route>
+          <Route path='/createTest' element={<CreateTest />}></Route>
+          <Route path='/courseDetails' element={<CourseDetails />}></Route>
           <Route path='/admin' element={<AdminDashboard/>}></Route>
         </Routes>
       </BrowserRouter>
