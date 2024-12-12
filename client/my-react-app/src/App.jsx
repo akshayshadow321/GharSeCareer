@@ -13,7 +13,8 @@ import EmpRegister from './components/EmpRegister';
 import Jobs from './pages/Jobs';
 import TestDetails from './components/TestDetails';
 import CreateTest from './components/CreateTest';
-
+import RejectedApproval from './components/RejectedApproval'
+ 
 
 function App() {
 
@@ -22,11 +23,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LandingPage />}></Route>
-          <Route path='/' element={<LandingPage />}></Route>
           <Route path='/pendingApproval' element={<PendingApproval />}></Route>
           <Route path='/testDetails' element={<TestDetails />}></Route>
           <Route path='/createTest' element={<CreateTest />}></Route>
-          <Route path='/courseDetails' element={<CourseDetails />}></Route>
+          <Route path='/courseDetails/:id' element={<CourseDetails />}></Route>
           <Route path='/admin' element={<AdminDashboard/>}></Route>
           <Route path='/rejectedApproval' element={<RejectedApproval/>}></Route>
           <Route path='/empRegister' element={<EmpRegister/>}></Route>

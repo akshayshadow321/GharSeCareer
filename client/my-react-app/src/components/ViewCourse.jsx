@@ -1,21 +1,39 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-const courses = [
-  {
-    courseName: "Digital Marketing",
-    Mentor: "Akshay",
-    Duration: "5 Hours",
-  },
-  {
-    courseName: "Cooking",
-    Mentor: "Akshay",
-    Duration: "5 Hours",
-  },
-];
+import { useEffect,useState } from "react";
+import axios from "axios";
+// const courses = [
+//   {
+//     courseName: "Digital Marketing",
+//     Mentor: "Akshay",
+//     Duration: "5 Hours",
+//   },
+//   {
+//     courseName: "Cooking",
+//     Mentor: "Akshay",
+//     Duration: "5 Hours",
+//   },
+// ];
 const ViewCourse = () => {
+
+  const [courses, setCourses] = useState([]);
+  useEffect(() => {
+    const fetchApi = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/getCourses')
+        // Filter out applicants who have status 'approved'
+        setCourses(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchApi();
+  }, []);
+
+
   const navigate = useNavigate();
-  const handleCourseView = () =>{
-    navigate('/courseDetails')
+  const handleCourseView = (id) => {
+    navigate(`/courseDetails/${props.product._id}`)
   }
   return (
     <div>
@@ -115,15 +133,15 @@ const ViewCourse = () => {
                 {course.courseName}
               </div>
               <div style={{ fontSize: "16px", textAlign: "center" }}>
-                {course.Mentor}
+                {course.mentor}
               </div>
               <div style={{ fontSize: "16px", textAlign: "center" }}>
-                {course.Duration}
+                {course.time}
               </div>
               <div style={{ fontSize: "16px", textAlign: "center" }}>
                 {/* Button to delete comp */}
                 <button
-                onClick={handleCourseView}
+                  onClick={() => {navigate(`/courseDetails/${course._id}`)}}
                   style={{
                     padding: "8px 15px",
                     backgroundColor: "#6a1b9a",

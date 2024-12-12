@@ -13,6 +13,6 @@ import Notifications from './components/Notification.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Notifications/>
+    <App/>
   </StrictMode>,
 )

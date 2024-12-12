@@ -17,9 +17,6 @@ const CourseSchema = new mongoose.Schema({
     mentor: { 
         type: String, required: true 
     }, 
-    courseImage :{
-        type : String, require: true
-    },
 
     applicants: [
         {

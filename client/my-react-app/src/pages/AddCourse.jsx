@@ -1,12 +1,27 @@
-import React from 'react'
-import { Controller } from 'react-hook-form'
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 function AddCourse() {
+  // Set up the form with react-hook-form
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  // Function to handle form submission
+  const onSubmit = async (data) => {
+    try {
+      // Send POST request to the backend
+      const response = await axios.post('http://localhost:3001/addCourse', data);
+      console.log('Course created:', response.data);
+      // Optionally, handle success (e.g., show a success message or reset form)
+    } catch (error) {
+      console.error('Error creating course:', error);
+      // Optionally, handle error (e.g., show an error message)
+    }
+  };
+
   return (
     <div
       style={{
-        
-        
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -15,9 +30,9 @@ function AddCourse() {
         padding: "20px",
       }}
     >
-
-      <h1 style={{ marginBottom: "6px", color: "black" ,fontSize:"25px"}}>New Course Details</h1>
+      <h1 style={{ marginBottom: "6px", color: "black", fontSize: "25px" }}>New Course Details</h1>
       <form
+        onSubmit={handleSubmit(onSubmit)}
         style={{
           width: "100%",
           maxWidth: "500px",
@@ -27,6 +42,7 @@ function AddCourse() {
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
         }}
       >
+        {/* Course Name */}
         <div style={{ marginBottom: "20px" }}>
           <label
             style={{
@@ -39,7 +55,7 @@ function AddCourse() {
             Course Name
           </label>
           <input
-            name="courseName"
+            {...register("courseName", { required: "Course name is required" })}
             type="text"
             placeholder="Enter course name"
             style={{
@@ -50,8 +66,10 @@ function AddCourse() {
               fontSize: "16px",
             }}
           />
+          {errors.courseName && <p style={{ color: "red" }}>{errors.courseName.message}</p>}
         </div>
 
+        {/* Description */}
         <div style={{ marginBottom: "20px" }}>
           <label
             style={{
@@ -64,7 +82,7 @@ function AddCourse() {
             Description
           </label>
           <textarea
-            name="desc"
+            {...register("description", { required: "Description is required" })}
             placeholder="Enter course description"
             style={{
               width: "100%",
@@ -76,8 +94,10 @@ function AddCourse() {
               minHeight: "100px",
             }}
           ></textarea>
+          {errors.description && <p style={{ color: "red" }}>{errors.description.message}</p>}
         </div>
 
+        {/* Duration */}
         <div style={{ marginBottom: "20px" }}>
           <label
             style={{
@@ -90,7 +110,7 @@ function AddCourse() {
             Duration (in minutes)
           </label>
           <input
-            name="time"
+            {...register("time", { required: "Duration is required", valueAsNumber: true })}
             type="number"
             placeholder="Enter course duration"
             style={{
@@ -101,8 +121,10 @@ function AddCourse() {
               fontSize: "16px",
             }}
           />
+          {errors.time && <p style={{ color: "red" }}>{errors.time.message}</p>}
         </div>
 
+        {/* Mentor Name */}
         <div style={{ marginBottom: "20px" }}>
           <label
             style={{
@@ -115,7 +137,7 @@ function AddCourse() {
             Mentor Name
           </label>
           <input
-            name="mentor"
+            {...register("mentor", { required: "Mentor name is required" })}
             type="text"
             placeholder="Enter mentor's name"
             style={{
@@ -126,33 +148,10 @@ function AddCourse() {
               fontSize: "16px",
             }}
           />
+          {errors.mentor && <p style={{ color: "red" }}>{errors.mentor.message}</p>}
         </div>
-        <div style={{ marginBottom: "20px" }}>
-            <label
-                style={{
-                display: "block",
-                textAlign: "left",
-                marginBottom: "8px",
-                fontWeight: "bold",
-                }}
-            >
-                Image
-            </label>
-            <input
-                name="courseImage"
-                type="file"
-                accept="image/*"
-                placeholder="Upload your image here"
-                style={{
-                width: "100%",
-                padding: "12px",
-                borderRadius: "5px",
-                border: "1px solid #ddd",
-                fontSize: "16px",
-                }}
-            />
-            </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
           style={{
@@ -175,7 +174,7 @@ function AddCourse() {
         </button>
       </form>
     </div>
-  )
+  );
 }
 
-export default AddCourse
+export default AddCourse;

@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import UserRoutes from './routes/UserRoutes.js'
 import EmployerApplicantsRoutes from './routes/EmployerApplicantsRoutes.js'
 import EmployerRoutes from './routes/EmployerRoutes.js'
+import CourseRoutes from './routes/CourseRoutes.js'
 dotenv.config()
 
 const app = express();
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 app.use('/', UserRoutes);
 app.use('/', EmployerApplicantsRoutes)
 app.use('/',EmployerRoutes)
+app.use('/',CourseRoutes)
 
 
 app.listen(process.env.PORT, () => {

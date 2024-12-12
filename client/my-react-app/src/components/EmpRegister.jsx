@@ -1,10 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 const EmpRegister = () => {
   const { register, handleSubmit, formState: { errors },watch } = useForm();
   const email = localStorage.getItem('email');
+  const navigate = useNavigate();
+  
 
   const onSubmit = async (data) => {
     try {
@@ -19,6 +21,7 @@ const EmpRegister = () => {
       });
 
       console.log('Employer registered successfully:', response.data);
+      navigate('')
       // Handle successful registration (e.g., navigate to a different page or show a success message)
     } catch (error) {
       console.error('Error registering employer:', error);
