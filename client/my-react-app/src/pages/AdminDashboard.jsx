@@ -17,8 +17,9 @@ const AdminDashboard = () => {
       
       <div
         style={{
+          position:'fixed',
           width: "220px",
-          height:'auto',
+          height:'100%',
           backgroundColor: "#6a1b9a", // Dark violet color for sidebar
           color: "#fff",
           padding: "20px",
