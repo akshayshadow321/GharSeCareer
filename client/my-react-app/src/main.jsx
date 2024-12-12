@@ -9,6 +9,6 @@ import JobScreen from './pages/JobScreen.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <CourseScreen/>
+    <App/>
   </StrictMode>,
 )

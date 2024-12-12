@@ -6,7 +6,7 @@ function AddCourse() {
     <div
       style={{
         
-        backgroundColor: "violet",
+        
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -16,7 +16,7 @@ function AddCourse() {
       }}
     >
 
-      <h1 style={{ marginBottom: "6px",marginTop:'20px', color: "white" ,fontSize:"25px"}}>New Course Details</h1>
+      <h1 style={{ marginBottom: "6px", color: "black" ,fontSize:"25px"}}>New Course Details</h1>
       <form
         style={{
           width: "100%",
