@@ -4,36 +4,57 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 
 export default function LoginButton() {
+    const [role, setRole] = useState('user');
     const ButtonClass = "btn btn-secondary border-0 text-black hover:bg-purple-700 bg-purple-500";
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
     const authUser = async (email, password) => {
-        try {
-            const response = await axios.post('http://localhost:3001/auth', { email, password });
-            console.log(response.data);
-            if (response.data.validCreds) {
-                toast.loading('Logging in...');
-                localStorage.setItem("email", email);
-                localStorage.setItem("id", response.data.id);
+        if (role == "user") {
+            try {
+                const response = await axios.post('http://localhost:3001/auth', { email, password });
+                console.log(response.data);
+                if (response.data.validCreds) {
+                    toast.loading('Logging in...');
+                    localStorage.setItem("email", email);
+                    localStorage.setItem("id", response.data.id);
 
-                if (email == "admin@gmail.com") {
-                    console.log('here')
+                    if (email == "admin@gmail.com") {
+                        console.log('here')
+                        setTimeout(() => {
+                            navigate('/admin');
+                        }, 1500);
+                    }
                     setTimeout(() => {
-                        navigate('/admin');
+                        window.location.reload();
                     }, 1500);
+                } else {
+                    toast.error(response.data.message);
                 }
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1500);
-            } else {
-                toast.error(response.data.message);
+            } catch (err) {
+                console.log(err);
             }
-        } catch (err) {
-            console.log(err);
+        } else {
+            try {
+                const response = await axios.post('http://localhost:3001/empAuth', { email, password });
+                console.log(response.data);
+                if (response.data.validCreds) {
+                    toast.loading('Logging in...');
+                    localStorage.setItem("email", email);
+                    localStorage.setItem("id", response.data.id);
+
+                    toast.success('Logged in as company')
+                } else {
+                    toast.error(response.data.message);
+                }
+            } catch (err) {
+                console.log(err);
+            }
         }
+
     };
 
     const onSubmit = (data) => {
@@ -56,6 +77,31 @@ export default function LoginButton() {
                         </div>
                         <div className="modal-body">
                             <form onSubmit={handleSubmit(onSubmit)}>
+                                <div className="mb-3">
+                                    <label className="form-label">Login as:</label>
+                                    <div>
+                                        <input
+                                            type="radio"
+                                            id="user"
+                                            name="role"
+                                            value="user"
+                                            checked={role === 'user'}
+                                            onChange={() => setRole('user')}
+                                        />
+                                        <label htmlFor="user" className="ms-2">User</label>
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="radio"
+                                            id="employer"
+                                            name="role"
+                                            value="employer"
+                                            checked={role === 'employer'}
+                                            onChange={() => setRole('employer')}
+                                        />
+                                        <label htmlFor="employer" className="ms-2">Employer</label>
+                                    </div>
+                                </div>
                                 <div className="mb-3">
                                     <label htmlFor="email-log" className="form-label">Email</label>
                                     <input
