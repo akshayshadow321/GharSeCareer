@@ -5,10 +5,13 @@ import ViewEmployers from "../components/ViewEmployers";
 import ViewUser from "../components/ViewUser";
 import ViewCourse from "../components/ViewCourse";
 import AddCourse from "./AddCourse";
-
+import { useNavigate } from "react-router-dom";
 const AdminDashboard = () => {
   const [view, setView] = useState("user"); // State should be 'view', not 'type'
-  
+  const navigate = useNavigate();
+  const handleLogoutClick = () =>{
+    navigate('/')
+}
 
   return (
     <>
@@ -109,6 +112,7 @@ const AdminDashboard = () => {
          Add Course
         </button>
         <button
+        onClick={handleLogoutClick}
           style={{
             width: "100%",
             padding: "15px",
