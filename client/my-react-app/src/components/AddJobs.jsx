@@ -1,38 +1,49 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import EmpSideBar from "./EmpSideBar";
 
 const AddJobs = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   // Function to handle form submission
   const onSubmit = async (data) => {
     try {
       // Assuming the employer's email is stored in localStorage
-      const email = localStorage.getItem('email');
+      const email = localStorage.getItem("email");
 
       // Prepare the data to be sent to the backend
       const jobData = {
-        email: email,          // Send the employer's email
-        post: data.jobPost,    // Job post title
-        jd: data.jobDesc,      // Job description
-        duration: data.time,   // Job duration
-        stipend: data.stpend,  // Job stipend
+        email: email, // Send the employer's email
+        post: data.jobPost, // Job post title
+        jd: data.jobDesc, // Job description
+        duration: data.time, // Job duration
+        stipend: data.stpend, // Job stipend
         criteria: data.crieteris, // Job criteria
       };
 
       // Send request to backend
-      const response = await axios.post('http://localhost:3001/addJob', jobData);
-      console.log('Job posted successfully:', response.data);
+      const response = await axios.post(
+        "http://localhost:3001/addJob",
+        jobData
+      );
+      console.log("Job posted successfully:", response.data);
       // Handle success (e.g., show success message, reset form, etc.)
     } catch (error) {
-      console.error('Error posting job:', error);
+      console.error("Error posting job:", error);
       // Handle error (e.g., show error message to user)
     }
   };
 
   return (
     <div>
+      <div>
+        <EmpSideBar/>
+      </div>
       <div
         style={{
           display: "flex",
@@ -44,7 +55,7 @@ const AddJobs = () => {
         }}
       >
         <h1 style={{ marginBottom: "6px", color: "black", fontSize: "25px" }}>
-          New Job Posting 
+          New Job Posting
         </h1>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -69,7 +80,9 @@ const AddJobs = () => {
               Post
             </label>
             <input
-              {...register("jobPost", { required: "Job post/title is required" })}
+              {...register("jobPost", {
+                required: "Job post/title is required",
+              })}
               type="text"
               placeholder="Enter the job post/title"
               style={{
@@ -80,7 +93,9 @@ const AddJobs = () => {
                 fontSize: "16px",
               }}
             />
-            {errors.jobPost && <span style={{ color: "red" }}>{errors.jobPost.message}</span>}
+            {errors.jobPost && (
+              <span style={{ color: "red" }}>{errors.jobPost.message}</span>
+            )}
           </div>
 
           <div style={{ marginBottom: "20px" }}>
@@ -95,7 +110,9 @@ const AddJobs = () => {
               Job Description
             </label>
             <textarea
-              {...register("jobDesc", { required: "Job description is required" })}
+              {...register("jobDesc", {
+                required: "Job description is required",
+              })}
               placeholder="Enter job description"
               style={{
                 width: "100%",
@@ -107,7 +124,9 @@ const AddJobs = () => {
                 minHeight: "100px",
               }}
             ></textarea>
-            {errors.jobDesc && <span style={{ color: "red" }}>{errors.jobDesc.message}</span>}
+            {errors.jobDesc && (
+              <span style={{ color: "red" }}>{errors.jobDesc.message}</span>
+            )}
           </div>
 
           <div style={{ marginBottom: "20px" }}>
@@ -133,7 +152,9 @@ const AddJobs = () => {
                 fontSize: "16px",
               }}
             />
-            {errors.time && <span style={{ color: "red" }}>{errors.time.message}</span>}
+            {errors.time && (
+              <span style={{ color: "red" }}>{errors.time.message}</span>
+            )}
           </div>
 
           <div style={{ marginBottom: "20px" }}>
@@ -159,7 +180,9 @@ const AddJobs = () => {
                 fontSize: "16px",
               }}
             />
-            {errors.stpend && <span style={{ color: "red" }}>{errors.stpend.message}</span>}
+            {errors.stpend && (
+              <span style={{ color: "red" }}>{errors.stpend.message}</span>
+            )}
           </div>
 
           <div style={{ marginBottom: "20px" }}>
@@ -185,7 +208,9 @@ const AddJobs = () => {
                 fontSize: "16px",
               }}
             />
-            {errors.crieteris && <span style={{ color: "red" }}>{errors.crieteris.message}</span>}
+            {errors.crieteris && (
+              <span style={{ color: "red" }}>{errors.crieteris.message}</span>
+            )}
           </div>
 
           <button
