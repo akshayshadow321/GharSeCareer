@@ -8,9 +8,11 @@ import CourseScreen from './pages/CourseScreen.jsx'
 import JobScreen from './pages/JobScreen.jsx'
 import Test from './components/Test.jsx'
 import PlayVideo from './pages/PlayVideo.jsx'
+import Email from './pages/Email.jsx'
+import Notifications from './components/Notification.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App/>
+    <Notifications/>
   </StrictMode>,
 )
