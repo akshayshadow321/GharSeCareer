@@ -61,5 +61,26 @@ export const updateRequestStatus = async (req, res) => {
     }
 };
 
+export const checkStatus = async (req, res) => {
+    const { companyEmail } = req.body;
+  
+    try {
+      // Find the application by email
+      const application = await EmployerApplicationModel.findOne({ compEmail: companyEmail });
+  
+      if (application) {
+        // If the application exists, return the status
+        res.status(200).json({ success: true, status: application.status });
+      } else {
+        // If the application does not exist
+        res.status(404).json({ success: false, message: 'No application found for this email.' });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, message: 'Server error' });
+    }
+  };
+  
+
 
 

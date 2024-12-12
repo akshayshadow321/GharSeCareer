@@ -4,6 +4,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import UserRoutes from './routes/UserRoutes.js'
 import EmployerApplicantsRoutes from './routes/EmployerApplicantsRoutes.js'
+import EmployerRoutes from './routes/EmployerRoutes.js'
 dotenv.config()
 
 const app = express();
@@ -24,9 +25,11 @@ app.get('/', (req, res) => {
 
 app.use('/', UserRoutes);
 app.use('/', EmployerApplicantsRoutes)
+app.use('/',EmployerRoutes)
 
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on ${process.env.PORT}`)
 })
 
+ 

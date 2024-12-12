@@ -1,8 +1,31 @@
-import React from "react";
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 const EmpRegister = () => {
-  let compName = "New Tech"
-  let email = "newtech@gmail.com"
+  const { register, handleSubmit, formState: { errors },watch } = useForm();
+  const email = localStorage.getItem('email');
+
+  const onSubmit = async (data) => {
+    try {
+      // Send data to backend
+      const response = await axios.post('http://localhost:3001/empRegister', {
+        companyName: data.companyName,
+        email: email,
+        password: data.password,
+        number: data.contact,
+        address: data.address,
+        description: data.description,
+      });
+
+      console.log('Employer registered successfully:', response.data);
+      // Handle successful registration (e.g., navigate to a different page or show a success message)
+    } catch (error) {
+      console.error('Error registering employer:', error);
+      // Handle error (e.g., show error message to user)
+    }
+  };
+
   return (
     <div>
       <div
@@ -20,6 +43,7 @@ const EmpRegister = () => {
           <br /> please fill in the details to get started
         </h1>
         <form
+          onSubmit={handleSubmit(onSubmit)}
           style={{
             width: "100%",
             maxWidth: "500px",
@@ -38,36 +62,10 @@ const EmpRegister = () => {
                 fontWeight: "bold",
               }}
             >
-              Comapny Name
-            </label>
-            <input
-              name="compName"
-              value={compName}
-              type="text"
-              readOnly
-              
-              style={{
-                width: "100%",
-                padding: "12px",
-                borderRadius: "5px",
-                border: "1px solid #ddd",
-                fontSize: "16px",
-              }}
-            />
-          </div>
-          <div style={{ marginBottom: "20px" }}>
-            <label
-              style={{
-                display: "block",
-                textAlign: "left",
-                marginBottom: "8px",
-                fontWeight: "bold",
-              }}
-            >
               Official Email
             </label>
             <input
-              name="compEamil"
+              name="compEmail"
               value={email}
               type="text"
               readOnly
@@ -90,10 +88,36 @@ const EmpRegister = () => {
                 fontWeight: "bold",
               }}
             >
+              Company Name
+            </label>
+            <input
+              {...register('companyName', { required: 'Company Name is required' })}
+              type="text"
+              placeholder="Enter your company name"
+              style={{
+                width: "100%",
+                padding: "12px",
+                borderRadius: "5px",
+                border: "1px solid #ddd",
+                fontSize: "16px",
+              }}
+            />
+            {errors.companyName && <span style={{ color: 'red' }}>{errors.companyName.message}</span>}
+          </div>
+
+          <div style={{ marginBottom: "20px" }}>
+            <label
+              style={{
+                display: "block",
+                textAlign: "left",
+                marginBottom: "8px",
+                fontWeight: "bold",
+              }}
+            >
               Description
             </label>
             <textarea
-              name="empDesc"
+              {...register('description')}
               placeholder="Tell us what your company is about"
               style={{
                 width: "100%",
@@ -116,12 +140,18 @@ const EmpRegister = () => {
                 fontWeight: "bold",
               }}
             >
-              Conatct number
+              Contact number
             </label>
             <input
-              name="empContact"
+              {...register('contact', {
+                required: 'Contact number is required',
+                pattern: {
+                  value: /^[0-9]+$/,
+                  message: 'Invalid contact number',
+                },
+              })}
               type="number"
-              placeholder="Enter your conatct"
+              placeholder="Enter your contact number"
               style={{
                 width: "100%",
                 padding: "12px",
@@ -130,7 +160,9 @@ const EmpRegister = () => {
                 fontSize: "16px",
               }}
             />
+            {errors.contact && <span style={{ color: 'red' }}>{errors.contact.message}</span>}
           </div>
+
           <div style={{ marginBottom: "20px" }}>
             <label
               style={{
@@ -143,8 +175,8 @@ const EmpRegister = () => {
               Address
             </label>
             <textarea
-              name="empAddress"
-              placeholder="Tell us where your company is loacted"
+              {...register('address', { required: 'Address is required' })}
+              placeholder="Tell us where your company is located"
               style={{
                 width: "100%",
                 padding: "12px",
@@ -155,6 +187,7 @@ const EmpRegister = () => {
                 minHeight: "100px",
               }}
             ></textarea>
+            {errors.address && <span style={{ color: 'red' }}>{errors.address.message}</span>}
           </div>
 
           <div style={{ marginBottom: "20px" }}>
@@ -169,7 +202,13 @@ const EmpRegister = () => {
               Password
             </label>
             <input
-              name="empPwd"
+              {...register('password', {
+                required: 'Password is required',
+                minLength: {
+                  value: 6,
+                  message: 'Password should be at least 6 characters long',
+                },
+              })}
               type="password"
               placeholder="Enter your password"
               style={{
@@ -180,7 +219,9 @@ const EmpRegister = () => {
                 fontSize: "16px",
               }}
             />
+            {errors.password && <span style={{ color: 'red' }}>{errors.password.message}</span>}
           </div>
+
           <div style={{ marginBottom: "20px" }}>
             <label
               style={{
@@ -193,9 +234,13 @@ const EmpRegister = () => {
               Confirm Password
             </label>
             <input
-              name="empPwd"
+              {...register('confirmPassword', {
+                required: 'Confirm Password is required',
+                validate: value =>
+                  value === watch('password') || 'Passwords do not match',
+              })}
               type="password"
-              placeholder="Confirm password(should be same as the password)"
+              placeholder="Confirm your password"
               style={{
                 width: "100%",
                 padding: "12px",
@@ -204,31 +249,7 @@ const EmpRegister = () => {
                 fontSize: "16px",
               }}
             />
-          </div>
-          <div style={{ marginBottom: "20px" }}>
-            <label
-              style={{
-                display: "block",
-                textAlign: "left",
-                marginBottom: "8px",
-                fontWeight: "bold",
-              }}
-            >
-              Image
-            </label>
-            <input
-              name="companyImage"
-              type="file"
-              accept="image/*"
-              placeholder="Upload your company's banner image here"
-              style={{
-                width: "100%",
-                padding: "12px",
-                borderRadius: "5px",
-                border: "1px solid #ddd",
-                fontSize: "16px",
-              }}
-            />
+            {errors.confirmPassword && <span style={{ color: 'red' }}>{errors.confirmPassword.message}</span>}
           </div>
 
           <button
@@ -249,7 +270,7 @@ const EmpRegister = () => {
             onMouseOver={(e) => (e.target.style.backgroundColor = "#5c1b7d")}
             onMouseOut={(e) => (e.target.style.backgroundColor = "#7a2d96")}
           >
-            Submit Course
+            Submit Details
           </button>
         </form>
       </div>

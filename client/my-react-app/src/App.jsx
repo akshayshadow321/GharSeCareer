@@ -22,11 +22,15 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LandingPage />}></Route>
+          <Route path='/' element={<LandingPage />}></Route>
           <Route path='/pendingApproval' element={<PendingApproval />}></Route>
           <Route path='/testDetails' element={<TestDetails />}></Route>
           <Route path='/createTest' element={<CreateTest />}></Route>
           <Route path='/courseDetails' element={<CourseDetails />}></Route>
           <Route path='/admin' element={<AdminDashboard/>}></Route>
+          <Route path='/rejectedApproval' element={<RejectedApproval/>}></Route>
+          <Route path='/empRegister' element={<EmpRegister/>}></Route>
+          <Route path='/jobCreation' element={<AddJobs/>}></Route>
         </Routes>
       </BrowserRouter>
     </>
