@@ -30,4 +30,8 @@ export const createApplication = async (req, res) => {
     }
 };
 
+export const updateRequestStatus = async (req,res) => {
+    
+}
+
 

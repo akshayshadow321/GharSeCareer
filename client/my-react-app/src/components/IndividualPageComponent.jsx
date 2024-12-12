@@ -1,12 +1,31 @@
 import React from "react";
 
 const IndividualPageComponent = () => {
+  const reviews = [
+    {
+      name: "Alice Johnson",
+      date: "1 day ago",
+      comment:
+        "This course was incredibly helpful! The instructor explained everything clearly and the examples were practical.",
+    },
+    {
+      name: "Mark Spencer",
+      date: "3 days ago",
+      comment:
+        "A great experience overall. I learned so many new techniques to enhance my cooking skills.",
+    },
+    {
+      name: "Sophia Lee",
+      date: "1 week ago",
+      comment:
+        "Perfect for beginners and experienced cooks alike. Highly recommend this course!",
+    },
+  ];
+
   return (
     <div className="bg-gray-50 min-h-screen">
-      
-      {/* Main Content */}
       <main className="container mx-auto mt-8 px-6">
-        {/* Course Header */}
+        {/* Course Header Section */}
         <div className="flex flex-col md:flex-row items-center bg-white shadow-lg rounded-lg overflow-hidden">
           <img
             src="https://via.placeholder.com/500x300"
@@ -17,8 +36,20 @@ const IndividualPageComponent = () => {
             <h2 className="text-2xl font-bold text-gray-800">
               How to Create an Online Course: The Official Udemy Course
             </h2>
+            {/* Instructors Section */}
+            <section className="bg-white p-4 rounded-lg shadow">
+              <h3 className="text-xl font-bold text-gray-800">Instructors</h3>
+              <div className="mt-4 text-gray-600">
+                <p className="font-bold text-gray-800">Udemy Instructor Team</p>
+                <p>Official Udemy Instructor Account</p>
+                <p className="mt-2">
+                  The Udemy Instructor Team has one passion: Akshay
+                </p>
+              </div>
+            </section>
             <p className="text-gray-600 mt-4">
-              Use our recommended best practices to plan, produce, and publish a well-designed, high-quality Udemy course.
+              Use our recommended best practices to plan, produce, and publish a
+              well-designed, high-quality Udemy course.
             </p>
             <div className="flex items-center mt-4">
               <span className="text-yellow-500 font-semibold">4.6</span>
@@ -34,9 +65,11 @@ const IndividualPageComponent = () => {
 
         {/* Side-by-Side Sections */}
         <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* What You'll Learn */}
+          {/* What You'll Learn Section */}
           <section className="bg-white p-4 rounded-lg shadow">
-            <h3 className="text-xl font-bold text-gray-800">Description</h3>
+            <h3 className="text-xl font-bold text-gray-800">
+              Description
+            </h3>
             <ul className="mt-4 space-y-2 text-gray-600">
               <li>How to structure a course effectively</li>
               <li>Best practices for video production</li>
@@ -45,7 +78,7 @@ const IndividualPageComponent = () => {
             </ul>
           </section>
 
-          {/* Course Content */}
+          {/* Course Content Section */}
           <section className="bg-white p-4 rounded-lg shadow">
             <h3 className="text-xl font-bold text-gray-800">Course Content</h3>
             <ul className="mt-4 space-y-2 text-gray-600">
@@ -55,34 +88,23 @@ const IndividualPageComponent = () => {
               <li>4: Publishing and Marketing (28 mins)</li>
             </ul>
           </section>
-
-          {/* Reviews */}
-          <section className="bg-white p-4 rounded-lg shadow">
-            <h3 className="text-xl font-bold text-gray-800">Reviews</h3>
-            <div className="mt-4">
-              <div className="text-yellow-500 text-2xl font-bold">4.6</div>
-              <div className="mt-2 space-y-1 text-gray-600">
-                <p>★★★★★ - 61%</p>
-                <p>★★★★☆ - 30%</p>
-                <p>★★★☆☆ - 7%</p>
-                <p>★★☆☆☆ - 2%</p>
-                <p>★☆☆☆☆ - 1%</p>
+        </div>
+        {/* Reviews Section */}
+        <div className="bg-white p-4 rounded-lg shadow">
+          <h3 className="text-xl font-bold text-gray-800">Reviews</h3>
+          <div className="mt-4 space-y-4">
+            {reviews.map((review, index) => (
+              <div key={index} className="bg-gray-100 rounded-lg p-4 shadow-md">
+                <div className="flex justify-between items-center mb-2">
+                  <h4 className="text-lg font-semibold text-yellow-800">
+                    {review.name}
+                  </h4>
+                  <span className="text-sm text-gray-600">{review.date}</span>
+                </div>
+                <p className="text-gray-700">{review.comment}</p>
               </div>
-            </div>
-          </section>
-
-          {/* Instructors */}
-          <section className="bg-white p-4 rounded-lg shadow">
-            <h3 className="text-xl font-bold text-gray-800">Instructors</h3>
-            <div className="mt-4 text-gray-600">
-              <p className="font-bold text-gray-800">Udemy Instructor Team</p>
-              <p>Official Udemy Instructor Account</p>
-              <p className="mt-2">
-                The Udemy Instructor Team has one passion: Udemy's instructors!
-                We'll work with you to help create an online course...
-              </p>
-            </div>
-          </section>
+            ))}
+          </div>
         </div>
       </main>
     </div>
