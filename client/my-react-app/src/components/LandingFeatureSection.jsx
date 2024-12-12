@@ -2,8 +2,25 @@ import React from "react";
 import img2 from "../assets/images/img2.png"
 import { Link } from "react-router-dom";
 import { FaDesktop, FaClipboardList, FaCertificate, FaGlobe, FaBriefcase, FaUsers } from "react-icons/fa";
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import axios from "axios";
 
 export default function LandingPage() {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate();
+    // Submit function
+    const onSubmit = async (data) => {
+        const { companyEmail, companyLink, companyName } = data;
+        const response = await axios.post('http://localhost:3001/createApplication', { companyEmail, companyLink, companyName })
+        if (response.success) {
+            toast.error('Could not send request');
+        } else {
+            navigate('/pendingApproval')
+        }
+    };
+
     const features = [
         {
             icon: <FaDesktop className="text-4xl text-blue-500" />,
@@ -30,43 +47,150 @@ export default function LandingPage() {
 
             {/* Hero Section */}
             <div className="container mx-auto mt-15 p-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-        {/* Left Section (Text Content) */}
-        <div className="text-left">
-          <h1 className="text-5xl font-bold text-gray-800 mb-4">
-            The <span className="text-orange-500">Smart</span> Choice For{" "}
-            <span className="text-blue-500">Future</span>
-          </h1>
-          <p className="text-gray-600 mb-6">
-            Empowering housewives through online courses to develop new skills and enhance
-            existing ones. Explore a variety of educational resources tailored to your needs.
-            Find flexible, work-from-home job opportunities with companies looking for skilled
-            workers.
-          </p>
-          <div>
-            <Link to="/user">
-              <button className="mt-4 bg-purple-500 text-white px-6 py-2 rounded hover:bg-purple-900 mr-4">
-                Get Started as User
-              </button>
-            </Link>
-            <Link to="/employee">
-              <button className="mt-4 bg-purple-500 text-white px-6 py-2 rounded hover:bg-purple-900">
-                Get Started as Employee
-              </button>
-            </Link>
-          </div>
-        </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                    {/* Left Section (Text Content) */}
+                    <div className="text-left">
+                        <h1 className="text-5xl font-bold text-gray-800 mb-4">
+                            The <span className="text-orange-500">Smart</span> Choice For{" "}
+                            <span className="text-blue-500">Future</span>
+                        </h1>
+                        <p className="text-gray-600 mb-6">
+                            Empowering housewives through online courses to develop new skills and enhance
+                            existing ones. Explore a variety of educational resources tailored to your needs.
+                            Find flexible, work-from-home job opportunities with companies looking for skilled
+                            workers.
+                        </p>
+                        <div>
+                            
+                                <button className="mt-4 bg-purple-500 text-white px-6 py-2 rounded hover:bg-purple-900 mr-4">
+                                    Get Started as User
+                                </button>
+                            
+                                <button className="mt-4 bg-purple-500 text-white px-6 py-2 rounded hover:bg-purple-900" data-bs-toggle="modal" data-bs-target="#employerModal">
+                                    Get Started as Employee
+                                </button>
+                           
+                        </div>
+                    </div>
 
-        {/* Right Section (Image Content) */}
-        <div className="flex justify-center">
-          <img
-            className="w-full h-auto max-w-screen-md rounded-lg shadow-lg"
-            src={img2} // Replace with your image path
-            alt="Landing Illustration"
-          />
-        </div>
-      </div>
-    </div>
+
+                    {/* Bootstrap Modal */}
+                    <div
+                        className="modal fade"
+                        id="employerModal"
+                        tabIndex="-1"
+                        aria-labelledby="employerModalLabel"
+                        aria-hidden="true"
+                    >
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="employerModalLabel">
+                                        Provide details for registration
+                                    </h5>
+                                    <button
+                                        type="button"
+                                        className="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                    ></button>
+                                </div>
+                                <div className="modal-body">
+                                    <form onSubmit={handleSubmit(onSubmit)}>
+                                        <div className="mb-3">
+                                            <label htmlFor="companyEmail" className="form-label">
+                                                Email
+                                            </label>
+                                            <input
+                                                type="email"
+                                                className={`form-control ${errors.companyEmail ? 'is-invalid' : ''}`}
+                                                id="companyEmail"
+                                                placeholder="Enter your company email"
+                                                {...register('companyEmail', {
+                                                    required: 'Email is required',
+                                                    pattern: {
+                                                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                                                        message: 'Invalid email format'
+                                                    }
+                                                })}
+                                            />
+                                            {errors.companyEmail && (
+                                                <div className="invalid-feedback">
+                                                    {errors.companyEmail.message}
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="companyName" className="form-label">
+                                                Name
+                                            </label>
+                                            <input
+                                                type="text"
+                                                className={`form-control ${errors.companyName ? 'is-invalid' : ''}`}
+                                                id="companyName"
+                                                placeholder="Enter your company name"
+                                                {...register('companyName', {
+                                                    required: 'Company name is required',
+                                                })}
+                                            />
+                                            {errors.companyName && (
+                                                <div className="invalid-feedback">
+                                                    {errors.companyName.message}
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="companyLink" className="form-label">
+                                                Company Information Link
+                                            </label>
+                                            <input
+                                                type="url"
+                                                className={`form-control ${errors.companyLink ? 'is-invalid' : ''}`}
+                                                id="companyLink"
+                                                placeholder="Enter a link to your company's information"
+                                                {...register('companyLink', {
+                                                    required: 'Company information link is required',
+                                                    pattern: {
+                                                        value: /^(ftp|http|https):\/\/[^ "]+$/,
+                                                        message: 'Invalid URL format'
+                                                    }
+                                                })}
+                                            />
+                                            {errors.companyLink && (
+                                                <div className="invalid-feedback">
+                                                    {errors.companyLink.message}
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className="modal-footer">
+                                            <button
+                                                type="button"
+                                                className="btn btn-secondary"
+                                                data-bs-dismiss="modal"
+                                            >
+                                                Close
+                                            </button>
+                                            <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Section (Image Content) */}
+                    <div className="flex justify-center">
+                        <img
+                            className="w-full h-auto max-w-screen-md rounded-lg shadow-lg"
+                            src={img2} // Replace with your image path
+                            alt="Landing Illustration"
+                        />
+                    </div>
+                </div>
+            </div>
             {/* Features Section */}
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
                 {features.map((feature, index) => (

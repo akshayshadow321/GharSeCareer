@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import UserRoutes from './routes/UserRoutes.js'
-
+import EmployerApplicantsRoutes from './routes/EmployerApplicantsRoutes.js'
 dotenv.config()
 
 const app = express();
@@ -23,6 +23,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/', UserRoutes);
+app.use('/', EmployerApplicantsRoutes)
 
 
 app.listen(process.env.PORT, () => {

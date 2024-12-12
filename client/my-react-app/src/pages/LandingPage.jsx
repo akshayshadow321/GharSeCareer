@@ -9,7 +9,6 @@ export default function LandingPage() {
     return (
         <>
             <LandingNavbar></LandingNavbar>
-            <GetStarted></GetStarted>
             <LandingFeatureSection></LandingFeatureSection>
             <LandingFooter></LandingFooter>
         </>
