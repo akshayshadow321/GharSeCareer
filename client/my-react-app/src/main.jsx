@@ -10,6 +10,6 @@ import Test from './components/Test.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Test/>
+    <App/>
   </StrictMode>,
 )
