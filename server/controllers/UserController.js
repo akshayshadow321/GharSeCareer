@@ -45,7 +45,11 @@ export const auth = async (req, res) => {
         const isMatch = await bcrypt.compare(password, data.password);
 
         if (isMatch) {
-            res.json({ validCreds: true, message: 'Name and Password are correct', id: data._id, name: data.name });
+            if(email == "admin@gmail.com"){
+                res.json({ validCreds: true, message: 'Admin', id: data._id, name: data.name });
+            }else{
+                res.json({ validCreds: true, message: 'Name and Password are correct', id: data._id, name: data.name });
+            }
         } else {
             res.json({ validCreds: false, message: 'Password is wrong!' });
         }
