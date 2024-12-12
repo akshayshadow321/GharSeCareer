@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import LandingNavbar from '../components/LandingNavbar.jsx'
+import { useNavigate } from 'react-router-dom';
 
 const Jobs = () => {
+  const navigate = useNavigate();
   // Example array of job posting data
   const jobs = [
     {
@@ -29,23 +32,23 @@ const Jobs = () => {
   ];
 
 
-// const Jobs = () => {
-//   const [jobs, setJobs] = useState([]);
-//   const [error, setError] = useState(null);
+  // const Jobs = () => {
+  //   const [jobs, setJobs] = useState([]);
+  //   const [error, setError] = useState(null);
 
-//   useEffect(() => {
-//     const fetchJobs = async () => {
-//       try {
-//         const response = await axios.get('http://localhost:4000/jobs'); 
-//         setJobs(response.data); 
-//       } catch (error) {
-//         console.error('Error fetching jobs:', error);
-//         setError('Failed to load jobs.'); 
-//       }
-//     };
+  //   useEffect(() => {
+  //     const fetchJobs = async () => {
+  //       try {
+  //         const response = await axios.get('http://localhost:4000/jobs'); 
+  //         setJobs(response.data); 
+  //       } catch (error) {
+  //         console.error('Error fetching jobs:', error);
+  //         setError('Failed to load jobs.'); 
+  //       }
+  //     };
 
-//     fetchJobs();
-//   }, []); 
+  //     fetchJobs();
+  //   }, []); 
 
   return (
     // <div className="container mx-auto p-6">
@@ -76,29 +79,32 @@ const Jobs = () => {
     //     )}
     //   </div>
     // </div>
+    <div>
+      <LandingNavbar/>
+      <div className="container mx-auto p-6">
+        <h1 className="text-3xl font-bold mb-6">Job Opportunities</h1>
 
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Job Opportunities</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {jobs.map((job) => (
+            <div key={job.id} className="bg-white rounded-lg shadow-lg p-6">
+              <div className="p-6">
+                <h2 className="text-2xl font-semibold mb-4">{job.jobTitle}</h2>
+                <p className="text-gray-700 mb-2">Company: {job.company}</p>
+                <p className="text-gray-600 mb-1">Duration: {job.duration}</p>
+                <p className="text-gray-700">Stipend: {job.stipend}</p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {jobs.map((job) => (
-          <div key={job.id} className="bg-white rounded-lg shadow-lg p-6">
-            <div className="p-6">
-              <h2 className="text-2xl font-semibold mb-4">{job.jobTitle}</h2>
-              <p className="text-gray-700 mb-2">Company: {job.company}</p>
-              <p className="text-gray-600 mb-1">Duration: {job.duration}</p>
-              <p className="text-gray-700">Stipend: {job.stipend}</p>
-
-              <div className="flex justify-center mt-4">
-                <button className="bg-teal-500 text-white px-6 py-2 rounded-lg hover:bg-teal-600 transition duration-300">
-                  Apply Now
-                </button>
+                <div className="flex justify-center mt-4">
+                  <button className="bg-teal-500 text-white px-6 py-2 rounded-lg hover:bg-teal-600 transition duration-300" onClick={() => {navigate('/individualJob')}}>
+                    Apply Now
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
+
   );
 };
 

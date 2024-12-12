@@ -17,6 +17,9 @@ import CreateTest from './components/CreateTest';
 import RejectedApproval from './components/RejectedApproval';
 import EmpDashboard from './pages/EmpDashboard';
 import JobApplicants from './components/JobApplicants';
+import Courses from './pages/Courses';
+import CourseScreen from './pages/CourseScreen';
+import JobScreen from './pages/JobScreen'
 
 
 function App() {
@@ -36,6 +39,12 @@ function App() {
           <Route path='/rejectedApproval' element={<RejectedApproval/>}></Route>
           <Route path='/empRegister' element={<EmpRegister/>}></Route>
           <Route path='/jobCreation' element={<AddJobs/>}></Route>
+          <Route path='/courses' element={<Courses/>}></Route>
+          <Route path='/jobs' element={<Jobs/>}></Route>
+          <Route path='/individualCourse' element={<CourseScreen/>}></Route>
+          <Route path='/individualJob' element={<JobScreen/>}></Route>
+          <Route path='/individualJob' element={<JobScreen/>}></Route>
+
           {/* <Route path='/chat' element={<ChatApp/>}></Route> */}
     
         </Routes>

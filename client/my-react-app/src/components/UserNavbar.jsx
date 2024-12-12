@@ -36,12 +36,12 @@ export default function UserHamburger() {
                         <div className="w-full">
                             <ul className="navbar-nav text-white flex flex-row w-full justify-evenly">
                                 <li className="nav-item">
-                                    <Link to="courses">
+                                    <Link to="/courses">
                                         <h1 className="nav-link text-white hover:scale-105 transition-all">Courses</h1>
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="products">
+                                    <Link to="/jobs">
                                         <h1 className="nav-link text-white hover:scale-105 transition-all">Jobs</h1>
                                     </Link>
                                 </li>

@@ -41,7 +41,7 @@ export default function EmployeerHamburger() {
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="products">
+                                    <Link to="jobs">
                                         <h1 className="nav-link text-white hover:scale-105 transition-all">Jobs</h1>
                                     </Link>
                                 </li>
