@@ -23,6 +23,9 @@ export default function LandingPage() {
                     navigate('/pendingApproval')
                    }else if (response.data.status == "Rejected"){
                     navigate('/rejectedApproval')
+                   }else{
+                    localStorage.setItem("email", companyEmail);
+                    navigate('/empRegister')
                    }
                 } else {
                     toast.error("No application found for this email.");

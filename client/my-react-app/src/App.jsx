@@ -18,10 +18,12 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<AddContent />}></Route>
+          <Route path='/' element={<LandingPage />}></Route>
           <Route path='/pendingApproval' element={<PendingApproval />}></Route>
           <Route path='/admin' element={<AdminDashboard/>}></Route>
           <Route path='/rejectedApproval' element={<RejectedApproval/>}></Route>
+          <Route path='/empRegister' element={<EmpRegister/>}></Route>
+          <Route path='/jobCreation' element={<AddJobs/>}></Route>
         </Routes>
       </BrowserRouter>
     </>
