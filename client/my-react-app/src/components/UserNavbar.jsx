@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AccountBubble from './AccountBubble';
 import LoginButton from './LoginButton';
-import SigninButton from './SignInButton';
+import SigninButton from './SigninButton';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa'; 
 

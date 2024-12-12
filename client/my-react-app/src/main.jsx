@@ -11,6 +11,6 @@ import PlayVideo from './pages/PlayVideo.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <PlayVideo/>
+    <App/>
   </StrictMode>,
 )

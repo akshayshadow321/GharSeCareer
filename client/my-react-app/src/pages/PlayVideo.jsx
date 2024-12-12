@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const PlayVideo = () => {
     let vdscr = "https://www.youtube.com/embed/xNRJwmlRBNU?si=COm_qVAHzj2dSv4R";
-    
+
     // State to manage the visibility of each dropdown
     const [activeDropdown, setActiveDropdown] = useState(null);
 
@@ -16,7 +16,7 @@ const PlayVideo = () => {
         <div style={{ padding: "15px" }}>
             {/* Use a div with Bootstrap container class */}
             <div className="container" style={{ display: "flex", flexDirection: "row", justifyContent: "left", alignItems: "flex-start" }}>
-                
+
                 {/* Bootstrap 5 Video Embed with aspect ratio */}
                 <div className="ratio ratio-16x9" style={{ maxWidth: "800px", width: "100%" }}>
                     <iframe
@@ -49,56 +49,43 @@ const PlayVideo = () => {
                             References
                         </button>
                         <ul className="mt-2 ml-4 border-l-2 border-gray-300 pl-4">
-                            <li className="mb-2 text-gray-600 hover:text-gray-800 cursor-pointer" onClick={() => handleDropdownToggle("https://example.com/utility-first")}>
-                                Utility-First Example
-                                {activeDropdown === "https://example.com/utility-first" && (
-                                    <div className="mt-2 text-blue-600">
-                                        <a href="https://example.com/utility-first" target="_blank" rel="noopener noreferrer">
-                                            Click here to view the reference
-                                        </a>
+                            {[{
+                                label: "Utility-First Example",
+                                link: "https://example.com/utility-first"
+                            }, {
+                                label: "Working with Colors",
+                                link: "https://example.com/colors"
+                            }, {
+                                label: "Container & Spacing",
+                                link: "https://example.com/container-spacing"
+                            }, {
+                                label: "Typography",
+                                link: "https://example.com/typography"
+                            }, {
+                                label: "Width & Height",
+                                link: "https://example.com/width-height"
+                            }].map((item) => (
+                                <li
+                                    key={item.link}
+                                    className="mb-2 flex-column text-gray-600 hover:text-gray-800 cursor-pointer flex  justify-between"
+                                    onClick={() => handleDropdownToggle(item.link)}
+                                >
+                                    <div className="flex  justify-between">
+                                        <span>{item.label}</span>
+                                        <span className={`transform transition-transform ${activeDropdown === item.link ? "rotate-180" : "rotate-0"}`}>
+                                            ▼
+                                        </span>
                                     </div>
-                                )}
-                            </li>
-                            <li className="mb-2 text-gray-600 hover:text-gray-800 cursor-pointer" onClick={() => handleDropdownToggle("https://example.com/colors")}>
-                                Working with Colors
-                                {activeDropdown === "https://example.com/colors" && (
-                                    <div className="mt-2 text-blue-600">
-                                        <a href="https://example.com/colors" target="_blank" rel="noopener noreferrer">
-                                            Click here to view the reference
-                                        </a>
-                                    </div>
-                                )}
-                            </li>
-                            <li className="mb-2 text-gray-600 hover:text-gray-800 cursor-pointer" onClick={() => handleDropdownToggle("https://example.com/container-spacing")}>
-                                Container & Spacing
-                                {activeDropdown === "https://example.com/container-spacing" && (
-                                    <div className="mt-2 text-blue-600">
-                                        <a href="https://example.com/container-spacing" target="_blank" rel="noopener noreferrer">
-                                            Click here to view the reference
-                                        </a>
-                                    </div>
-                                )}
-                            </li>
-                            <li className="mb-2 text-gray-600 hover:text-gray-800 cursor-pointer" onClick={() => handleDropdownToggle("https://example.com/typography")}>
-                                Typography
-                                {activeDropdown === "https://example.com/typography" && (
-                                    <div className="mt-2 text-blue-600">
-                                        <a href="https://example.com/typography" target="_blank" rel="noopener noreferrer">
-                                            Click here to view the reference
-                                        </a>
-                                    </div>
-                                )}
-                            </li>
-                            <li className="mb-2 text-gray-600 hover:text-gray-800 cursor-pointer" onClick={() => handleDropdownToggle("https://example.com/width-height")}>
-                                Width & Height
-                                {activeDropdown === "https://example.com/width-height" && (
-                                    <div className="mt-2 text-blue-600">
-                                        <a href="https://example.com/width-height" target="_blank" rel="noopener noreferrer">
-                                            Click here to view the reference
-                                        </a>
-                                    </div>
-                                )}
-                            </li>
+
+                                    {activeDropdown === item.link && (
+                                        <div className="mt-2 text-blue-600">
+                                            <a href={item.link} target="_blank" rel="noopener noreferrer">
+                                                Click here to view the reference
+                                            </a>
+                                        </div>
+                                    )}
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
