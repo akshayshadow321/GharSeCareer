@@ -87,7 +87,7 @@ function AddCourse() {
               fontWeight: "bold",
             }}
           >
-            Duration (in hours)
+            Duration (in minutes)
           </label>
           <input
             name="time"
